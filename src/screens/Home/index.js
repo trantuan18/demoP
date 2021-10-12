@@ -80,14 +80,18 @@ class Home extends Component {
             }}></Animated.View>
         </Pressable>
 
-
+        <Pressable
+          onPress={() => this.props.navigation.navigate("Home1")}
+        >
+          <View style={styles.viewBtnAnima}><Text>{"Go to Home1"}</Text></View>
+        </Pressable>
       </View>
     );
   }
 }
 
 import { connect } from 'react-redux';
-import { ChangeValue } from '../../redux/action';
+import { ChangeValue } from '@service/redux/action';
 import Easing from 'react-native/Libraries/Animated/Easing';
 
 const mapDispatchToProps = (dispatch) => {
