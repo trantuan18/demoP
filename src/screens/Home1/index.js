@@ -87,7 +87,7 @@ class Home extends Component {
 }
 
 import { connect } from 'react-redux';
-import { ChangeValue } from '@service/redux/action';
+import { ChangeValue } from '@src/Service/Redux/action';
 import Easing from 'react-native/Libraries/Animated/Easing';
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,0 +1,1 @@
+export const TIMING = 1000;

@@ -1,11 +1,11 @@
+import { TIMING } from '@Config/value';
+import { ChangeValue } from '@src/Service/Redux/action';
 import React, { Component } from 'react';
-import { Animated, View, Text, Pressable, } from 'react-native';
+import { Animated, Pressable, Text, View } from 'react-native';
+import Easing from 'react-native/Libraries/Animated/Easing';
+import { connect } from 'react-redux';
 import styles from './styles';
-
-const TIMING = 5000;
-
-
-
+import ButtonReduxAnimated from '@src/Components/ButtonReduxAnimated';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +61,7 @@ class Home extends Component {
             <View style={styles.viewBtn}><Text>+</Text></View>
           </Pressable>
         </View>
-        <Pressable
+        {/* <Pressable
           onPress={() => {
             this.OnPressDelay(1)
             this.fadeIn()
@@ -78,21 +78,22 @@ class Home extends Component {
               zIndex: -1,
               width: this.state.animatedWidth
             }}></Animated.View>
-        </Pressable>
+        </Pressable>*/}
 
         <Pressable
           onPress={() => this.props.navigation.navigate("Home1")}
         >
           <View style={styles.viewBtnAnima}><Text>{"Go to Home1"}</Text></View>
         </Pressable>
+
+
+        <ButtonReduxAnimated />
       </View>
     );
   }
 }
 
-import { connect } from 'react-redux';
-import { ChangeValue } from '@service/redux/action';
-import Easing from 'react-native/Libraries/Animated/Easing';
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
