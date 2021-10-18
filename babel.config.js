@@ -18,11 +18,6 @@ module.exports = {
         ],
         alias: {
           '@src': './src/',
-          '@Assets': './src/Assets/',
-          '@Components': './src/Components/',
-          '@Screens': './src/Screens/',
-          '@Service': './src/Service/',
-          '@Config': './src/Config',
         },
       },
     ],

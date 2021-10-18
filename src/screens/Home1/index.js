@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Animated, View, Text, Pressable, } from 'react-native';
 import styles from './styles';
+import { connect } from 'react-redux';
+import { ChangeValue } from '@src/service/redux/action';
+import Easing from 'react-native/Libraries/Animated/Easing';
 
-const TIMING = 5000;
+import { TIMING } from '@src/config/value';
 
 
 
@@ -86,9 +89,7 @@ class Home extends Component {
   }
 }
 
-import { connect } from 'react-redux';
-import { ChangeValue } from '@src/Service/Redux/action';
-import Easing from 'react-native/Libraries/Animated/Easing';
+
 
 const mapDispatchToProps = (dispatch) => {
   return {

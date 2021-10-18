@@ -3,8 +3,8 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Home from '@src/Screens/Home';
-import Home1 from '@src/Screens/Home1';
+import Home from '@src/screens/home';
+import Home1 from '@src/screens/home1';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 

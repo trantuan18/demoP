@@ -1,11 +1,11 @@
-import { TIMING } from '@Config/value';
-import { ChangeValue } from '@src/Service/Redux/action';
+import { TIMING } from '@src/config/value';
+import { ChangeValue } from '@src/service/redux/action';
 import React, { Component } from 'react';
 import { Animated, Pressable, Text, View } from 'react-native';
 import Easing from 'react-native/Libraries/Animated/Easing';
 import { connect } from 'react-redux';
 import styles from './styles';
-import ButtonReduxAnimated from '@src/Components/ButtonReduxAnimated';
+import ButtonReduxAnimated from '@src/components/buttonReduxAnimated';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -17,30 +17,6 @@ class Home extends Component {
 
   OnPress = (value) => {
     this.props.ChangeValue(value)
-  }
-
-  OnPressDelay = (value) => {
-    setTimeout(() => {
-      this.props.ChangeValue(value)
-    }, TIMING);
-  }
-
-  fadeIn = () => {
-    Animated.timing(this.state.animatedWidth, {
-      toValue: 120,
-      duration: TIMING,
-      easing: Easing.linear,
-      useNativeDriver: false
-    }).start(this.fadeOut())
-
-  };
-  fadeOut = () => {
-    Animated.timing(this.state.animatedWidth, {
-      toValue: 0,
-      duration: 0,
-      easing: Easing.linear,
-      useNativeDriver: false
-    }).start()
   }
 
   render() {
@@ -61,24 +37,6 @@ class Home extends Component {
             <View style={styles.viewBtn}><Text>+</Text></View>
           </Pressable>
         </View>
-        {/* <Pressable
-          onPress={() => {
-            this.OnPressDelay(1)
-            this.fadeIn()
-            setTimeout(() => {
-              this.fadeOut()
-            }, TIMING);
-          }}
-          style={{ position: 'relative', }}
-        >
-          <View style={styles.viewBtnAnima}><Text>{"+<>"}</Text></View>
-          <Animated.View
-            style={{
-              ...styles.viewBtnAnima, backgroundColor: 'red', position: 'absolute', top: 0, left: 0,
-              zIndex: -1,
-              width: this.state.animatedWidth
-            }}></Animated.View>
-        </Pressable>*/}
 
         <Pressable
           onPress={() => this.props.navigation.navigate("Home1")}

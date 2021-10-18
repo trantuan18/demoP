@@ -1,29 +1,29 @@
-import React, { useEffect, useState, } from 'react';
-import { Pressable, Text, View, Animated } from 'react-native';
-
-import { TIMING } from '@Config/value';
-import styles from './styles';
+import { TIMING } from '@src/config/value';
+import { ChangeValue } from '@src/service/redux/action';
+import React, { useEffect, useState } from 'react';
+import { Animated, Pressable, Text, View } from 'react-native';
 import Easing from 'react-native/Libraries/Animated/Easing';
-import { useSelector, useDispatch } from 'react-redux';
-import { ChangeValue } from '@src/Service/Redux/action';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import styles from './styles';
 
 
-const dispatch = useDispatch()
-
-const ButtonReduxAnimated = ({ }) => {
-  const counter = useSelector();
-  const dispatch = useDispatch()
-
-  const [animatedWidth, setanimatedWidth] = useState(new Animated.Value(0));
-  useEffect(() => {
-
-  });
+const ButtonReduxAnimated = ({ ChangeValue }) => {
+  const [isStartAnimated, setIsStartAnimated] = useState(false)
+  const animatedWidth = new Animated.Value(0)
 
   const OnPressDelay = (value) => {
+    setIsStartAnimated(true)
     setTimeout(() => {
-      dispatch(ChangeValue(value))
+      ChangeValue(value)
+      setIsStartAnimated(false)
     }, TIMING);
   }
+
+  useEffect(() => {
+    isStartAnimated ? fadeIn() : fadeOut()
+  }, [isStartAnimated])
+
 
   const fadeIn = () => {
     Animated.timing(animatedWidth, {
@@ -31,7 +31,7 @@ const ButtonReduxAnimated = ({ }) => {
       duration: TIMING,
       easing: Easing.linear,
       useNativeDriver: false
-    }).start(this.fadeOut())
+    }).start()
   };
 
   const fadeOut = () => {
@@ -47,10 +47,6 @@ const ButtonReduxAnimated = ({ }) => {
     <Pressable
       onPress={() => {
         OnPressDelay(1)
-        // fadeIn()
-        // setTimeout(() => {
-        //   fadeOut()
-        // }, TIMING);
       }}
       style={{ position: 'relative', }}
     >
@@ -65,4 +61,8 @@ const ButtonReduxAnimated = ({ }) => {
   )
 };
 
-export default ButtonReduxAnimated;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ ChangeValue }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(ButtonReduxAnimated);
