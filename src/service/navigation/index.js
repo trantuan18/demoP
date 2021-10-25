@@ -27,9 +27,12 @@ const Stack = createNativeStackNavigator()
 function NavigationApp() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
         <Stack.Screen name="HomeScreen" component={TabNavigator} />
-        {/* <Stack.Screen name="Home1" component={Home1} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   )
