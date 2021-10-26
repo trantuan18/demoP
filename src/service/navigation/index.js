@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import TabBar from '@src/components/tabBar'
 import Home from '@src/screens/home';
 import Home1 from '@src/screens/home1';
 
@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator
+      tabBar={props => <TabBar {...props} />}
       screenOptions={{
         headerShown: false
       }}
