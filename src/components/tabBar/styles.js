@@ -1,4 +1,4 @@
-import { ifIphoneX } from "@src/service/helper/CheckIphoneX";
+import { ifIphoneX, getBottomSpace } from "@src/service/helper/CheckIphoneX";
 import { Dimensions } from "react-native";
 
 var deviceWidth = Dimensions.get("window").width;
@@ -13,9 +13,15 @@ export default {
     width: deviceWidth,
     height: 60,
     ...ifIphoneX({
+      height: getBottomSpace() + 75,
+      paddingBottom: getBottomSpace() + 10
+    }, {
       height: 75,
       paddingBottom: 10
     }),
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
   },
   footerTab: {
     flex: 1,
@@ -29,7 +35,8 @@ export default {
     borderTopColor: "#BDBDBD",
   },
   btnTab: {
-    paddingLeft: 0, paddingRight: 0, margin: 0, height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: 25,
