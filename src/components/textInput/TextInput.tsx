@@ -1,63 +1,81 @@
-// components/TextInput.tsx
 import React from 'react';
-import {
-  View,
-  TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps,
-  Text,
-  StyleSheet
-} from 'react-native';
-/* IMPORT HOOKS AND PROPS TYPES */
-import {
-  useController,
-  useFormContext,
-  ControllerProps,
-  UseControllerProps
-} from 'react-hook-form';
 
-/* EXTENDING PROPS TYPES TO INHERIT NAME AND RULES FROM USECONTROLLERPROPS */
+import { View, TextInput as RNTextInput, TextInputProps as RNTextInputProps, Text, StyleSheet } from 'react-native';
+
+import { useController, useFormContext, ControllerProps, UseControllerProps } from 'react-hook-form';
+
 interface TextInputProps extends RNTextInputProps, UseControllerProps {
   label: string
-  defaultValue?: string //ADD DEFAULT VALUE TO PROPS
+  name: string
+  defaultValue?: string
+  setFormError: Function
 }
 
-export const TextInput = (props: TextInputProps) => {
+const ControlledInput = (props: TextInputProps) => {
 
-  /* GET THE FORMS CONTEXT */
   const formContext = useFormContext();
-  const { ...methods } = formContext
+  const { formState } = formContext;
 
   const {
-    label,
     name,
+    label,
     rules,
     defaultValue,
     ...inputProps
   } = props;
 
-  if (!formContext || !name) {
-    const msg = !formContext ? "TextInput must be wrapped by the FormProvider" : "Name must be defined"
-    console.error(msg)
-    return null
-  }
-
   const { field } = useController({ name, rules, defaultValue });
 
+  const hasError = Boolean(formState?.errors[name]);
+
   return (
+
     <View style={styles.container}>
       {label && (<Text style={styles.label}>{label}</Text>)}
-      <View style={styles.inputContainer}>
+      <View>
         <RNTextInput
+          autoCapitalize="none"
+          textAlign="left"
           style={styles.input}
           onChangeText={field.onChange}
           onBlur={field.onBlur}
           value={field.value}
           {...inputProps}
         />
+
+        <View style={styles.errorContainer}>
+          {hasError && (<Text style={styles.error}>{formState.errors[name].message}</Text>)}
+        </View>
+
       </View>
     </View>
 
   );
+}
+
+export const TextInput = (props: TextInputProps) => {
+
+  const {
+    name,
+    rules,
+    label,
+    defaultValue,
+    setFormError,
+    ...inputProps
+  } = props;
+
+  const formContext = useFormContext();
+
+  // Placeholder until input name is initialized
+  if (!formContext || !name) {
+    const msg = !formContext ? "TextInput must be wrapped by the FormProvider" : "Name must be defined"
+    console.error(msg)
+    setFormError(true)
+    return null
+  }
+
+  return <ControlledInput {...props} />;
+
 };
 
 
@@ -77,12 +95,16 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'white',
-    borderColor: 'none',
+    // borderColor: 'none',
     height: 40,
     padding: 10,
     borderRadius: 4,
   },
-  inputContainer: {
-
+  errorContainer: {
+    flex: -1,
+    height: 25
+  },
+  error: {
+    color: 'red'
   }
 });

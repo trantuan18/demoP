@@ -1,9 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import Login from '../Login';
 
-const Home = ({ }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  </View>
-);
+const Home = ({ }) => {
+  return (
+    <Login />
+  )
+};
 
 export default Home;
