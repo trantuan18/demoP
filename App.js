@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import NavigationApp from '@src/service/navigation';
-import store from '@src/service/redux/store';
+import NavigationApp from 'src/service/navigation';
+import store from 'src/service/redux/store';
 
 
 class App extends Component {

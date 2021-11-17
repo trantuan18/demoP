@@ -35,6 +35,7 @@ export default {
     borderTopColor: "#BDBDBD",
   },
   btnTab: {
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabBar from '@src/components/tabBar'
 import Home from '@src/screens/home';
 import Home1 from '@src/screens/home1';
+import NavigationScreen from "src/screens/notifyScreen";
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -18,8 +19,9 @@ function TabNavigator() {
         headerShown: false
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="NavigationScreen" component={NavigationScreen} />
       <Tab.Screen name="Home1" component={Home1} />
+      <Tab.Screen name="Home" component={Home} />
     </Tab.Navigator>
   )
 }
